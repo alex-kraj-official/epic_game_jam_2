@@ -1,0 +1,14 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Mainmenu.unity
+    guid: c9357f4fad73f1a4f9d4ef3a9cb7434a
+  - enabled: 1
+    path: Assets/Scenes/DifficultySelector.unity
+    guid: db041690d2c8626488bf3783c488628f
+  m_configObjects: {}
