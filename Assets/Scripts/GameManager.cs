@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
         InvokeRepeating(nameof(TriggerTaxEvent), taxInterval, taxInterval);
         UpdateLevelUI();
     }
-
     void TriggerTaxEvent()
     {
         if (!waitingForChoice)
@@ -42,7 +41,7 @@ public class GameManager : MonoBehaviour
         waitingForChoice = false;
     }
 
-    public void OnFightEnemy()
+    public void FightEnemy()
     {
         Debug.Log("Player chose to fight.");
         taxPanel.SetActive(false);
@@ -59,15 +58,9 @@ public class GameManager : MonoBehaviour
 
         // Placeholder: spawn enemy and start combat
         // When combat ends successfully:
-        EndFight();
     }
 
-    public void EndFight()
-    {
-        currentLevel++;
-        Debug.Log("Enemy defeated. Level is now: " + currentLevel);
-        UpdateLevelUI();
-    }
+
 
     void UpdateLevelUI()
     {
