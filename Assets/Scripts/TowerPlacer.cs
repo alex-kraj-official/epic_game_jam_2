@@ -217,12 +217,12 @@ public class TowerPlacer : MonoBehaviour
 
                 gateName.SetText(currentGate.name);
                 gateLevel.SetText(gateController.lvl.ToString());
-                gateHealth.SetText(gateController.health.ToString());
+                gateHealth.SetText(gateController.maxHealth.ToString());
                 gateArmor.SetText(gateController.armor.ToString());
                 gateCost.SetText(gateController.upgradeCost.ToString());
 
                 gateLevelN.SetText((gateController.lvl + 1).ToString());
-                gateHealthN.SetText((gateController.health + 1).ToString());
+                gateHealthN.SetText((gateController.maxHealth + 1).ToString());
                 gateArmorN.SetText((gateController.armor + 1).ToString());
             }
             else
@@ -333,12 +333,12 @@ public class TowerPlacer : MonoBehaviour
 
             gateName.SetText(currentGate.name);
             gateLevel.SetText(gateController.lvl.ToString());
-            gateHealth.SetText(gateController.health.ToString());
+            gateHealth.SetText(gateController.maxHealth.ToString());
             gateArmor.SetText(gateController.armor.ToString());
             gateCost.SetText(gateController.upgradeCost.ToString());
 
             gateLevelN.SetText((gateController.lvl + 1).ToString());
-            gateHealthN.SetText((gateController.health + 1).ToString());
+            gateHealthN.SetText((gateController.maxHealth + 1).ToString());
             gateArmorN.SetText((gateController.armor + 1).ToString());
             resourceManager.removeGold(gateController.upgradeCost);
         }
@@ -353,7 +353,7 @@ public class TowerPlacer : MonoBehaviour
         if (resourceManager.money >= gateController.repairCost)
         {
             gateController.repair();
-            gateHealth.SetText(gateController.health.ToString());
+            gateHealth.SetText(gateController.maxHealth.ToString());
             resourceManager.removeGold(gateController.repairCost);
         }
         else

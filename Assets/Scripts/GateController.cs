@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class GateController : MonoBehaviour
 {
-    public float health;
+    public float maxHealth;
+    public float currentHealth;
     public float armor;
     public float lvl;
     public float upgradeCost;
@@ -13,22 +14,23 @@ public class GateController : MonoBehaviour
 
     private void Update()
     {
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             Destroy(this.gameObject);
         }
     }
     public void takeDamage(float amount)
     {
-        health = health + armor - amount;
+        currentHealth = currentHealth + armor - amount;
     }
     public void repair()
     {
-        health = health + 5 * lvl;
+        currentHealth = currentHealth + 5 * lvl;
     }
     public void upgrade()
     {
-        health = health + 50;
+        maxHealth = maxHealth + 50;
+        currentHealth = maxHealth;
         armor = armor + 3;
         lvl++;
         upgradeCost = upgradeCost + 50;

@@ -1371,7 +1371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d541502eb421c8489f758342476c301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  maxHealth: 0
+  currentHealth: 0
   armor: 3
   lvl: 1
   upgradeCost: 50
@@ -1456,7 +1457,7 @@ Transform:
   m_GameObject: {fileID: 259834667}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.25, y: 1.67, z: -3.85}
+  m_LocalPosition: {x: -4.25, y: 1.67, z: -13.09}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1561,7 +1562,7 @@ Transform:
   m_GameObject: {fileID: 277751922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.8, y: 1, z: -12.08}
+  m_LocalPosition: {x: -10.8, y: 1, z: -24.74}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2274,7 +2275,7 @@ Transform:
   m_GameObject: {fileID: 425049148}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.99, y: 1, z: -17.84}
+  m_LocalPosition: {x: -2.84, y: 1, z: -31.4}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2642,7 +2643,7 @@ Transform:
   m_GameObject: {fileID: 488156980}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.32, y: 0.5, z: -22.61}
+  m_LocalPosition: {x: -7.32, y: 0.5, z: -38.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4557,7 +4558,7 @@ Transform:
   m_GameObject: {fileID: 1076901780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.99, y: 1, z: -8.03}
+  m_LocalPosition: {x: -3.99, y: 1, z: -17.95}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6848,6 +6849,7 @@ GameObject:
   - component: {fileID: 1734808341}
   - component: {fileID: 1734808340}
   - component: {fileID: 1734808342}
+  - component: {fileID: 1734808343}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -6940,6 +6942,22 @@ MonoBehaviour:
   maxPeopleText: {fileID: 162377507}
   oreText: {fileID: 162377507}
   wheatText: {fileID: 162377507}
+--- !u!114 &1734808343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734808339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0082dc7932c304e9db5895e50d0b6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevel: 1
+  taxInterval: 60
+  taxPanel: {fileID: 0}
+  levelText: {fileID: 0}
 --- !u!1 &1737949108
 GameObject:
   m_ObjectHideFlags: 0
