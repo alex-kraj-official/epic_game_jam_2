@@ -4,81 +4,19 @@ using TMPro;
 
 public class ProduceBuilding : MonoBehaviour
 {
-    public float level;
-    public float productionAmount;
-    public float productionTime;
-    public float upgradeCost;
-    public ResourceManager resourceManager;
-
     public TextMeshProUGUI amountText;
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI costText;
-
-    private void Start()
-    {
-        StartCoroutine(ProduceLoop());
-    }
+    public TextMeshProUGUI amountTextN;
+    public TextMeshProUGUI speedTextN;
+    public TextMeshProUGUI levelTextN;
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            upgrade();
-        }
-    }
-    IEnumerator ProduceLoop()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(productionTime);
-
-            if (resourceManager != null)
-            {
-                switch (gameObject.tag)
-                {
-                    case "sheep":
-                        resourceManager.getSheep(productionAmount);
-                        break;
-                    case "wood":
-                        resourceManager.getWood(productionAmount);
-                        break;
-                    case "people":
-                        resourceManager.getPeople(productionAmount);
-                        break;
-                    case "ore":
-                        resourceManager.getOre(productionAmount);
-                        break;
-                    case "wheat":
-                        resourceManager.getWheat(productionAmount);
-                        break;
-                    default:
-                        Debug.LogWarning("Unknown building tag: " + gameObject.tag);
-                        break;
-                }
-            }
-        }
-    }
-
-    //kell egy IEnumerator consumptionLoop
-
-    public void upgrade()
-    {
-        if (resourceManager.money >= upgradeCost)
-        {
-            level++;
-            productionTime--;
-            productionAmount++;
-            upgradeCost = upgradeCost + 50;
-
-            levelText.SetText(level.ToString());
-            speedText.SetText(productionTime.ToString());
-            costText.SetText(upgradeCost.ToString());
-            amountText.SetText(productionAmount.ToString());
-        }
-        else
-        {
-            Debug.Log("not enough money");
-            return;
+            //upgrade();
         }
     }
 }

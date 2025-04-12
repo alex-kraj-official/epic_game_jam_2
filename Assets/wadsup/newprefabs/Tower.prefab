@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 1467198769362280771}
   - component: {fileID: 9066438118713458206}
   m_Layer: 0
-  m_Name: Tower 1
+  m_Name: Tower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,4 +404,6 @@ MonoBehaviour:
   bullet: {fileID: 7800936550266773142, guid: b14e32f6d0b412e43873b0dc63f9f61c, type: 3}
   shootPoint: {fileID: 4984751259472500131}
   attackRate: 0.5
+  upgradeCost: 0
+  level: 0
   bulletDamage: 5

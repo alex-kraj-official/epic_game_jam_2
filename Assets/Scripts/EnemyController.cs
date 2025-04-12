@@ -61,7 +61,7 @@ public class EnemyController : MonoBehaviour
     }
     void attack()
     {
-        Debug.Log("attacked gate for: " + damage +  "damage");
+        //Debug.Log("attacked gate for: " + damage +  "damage");
         gateController.takeDamage(damage);
     }
     public void takeDamage(float damage)

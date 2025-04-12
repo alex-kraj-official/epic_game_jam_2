@@ -18,6 +18,7 @@ public class ProjectileController : MonoBehaviour
         else
         {
             Debug.LogWarning("Target is not assigned!");
+            Destroy(gameObject);
         }
     }
 
