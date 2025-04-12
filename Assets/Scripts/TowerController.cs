@@ -14,6 +14,8 @@ public class TowerController : MonoBehaviour
     public Transform shootPoint;
     public float attackRate = 0.5f;
     private float nextTimeToFire = 0f;
+    public float upgradeCost;
+    public float level;
 
     public float bulletDamage = 1f;
 

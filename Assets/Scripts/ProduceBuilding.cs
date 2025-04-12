@@ -14,6 +14,9 @@ public class ProduceBuilding : MonoBehaviour
     public TextMeshProUGUI speedText;
     public TextMeshProUGUI levelText;
     public TextMeshProUGUI costText;
+    public TextMeshProUGUI amountTextN;
+    public TextMeshProUGUI speedTextN;
+    public TextMeshProUGUI levelTextN;
 
     private void Start()
     {
@@ -74,6 +77,10 @@ public class ProduceBuilding : MonoBehaviour
             speedText.SetText(productionTime.ToString());
             costText.SetText(upgradeCost.ToString());
             amountText.SetText(productionAmount.ToString());
+
+            levelTextN.SetText((level+1).ToString());
+            speedTextN.SetText((productionTime+1).ToString());
+            amountTextN.SetText((productionAmount+1).ToString());
         }
         else
         {

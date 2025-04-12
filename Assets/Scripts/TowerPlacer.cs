@@ -1,7 +1,9 @@
+using System.Resources;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 
 public class TowerPlacer : MonoBehaviour
@@ -12,16 +14,26 @@ public class TowerPlacer : MonoBehaviour
     private bool isPlacing = false;
 
     //variables for panel
-    public GameObject panel;
+    public GameObject produceUpgradePanel;
+    public GameObject towerUpgradePanel;
+
     public TextMeshProUGUI namee;
+    public TextMeshProUGUI Lvl;
     public TextMeshProUGUI attackSpeed;
     public TextMeshProUGUI damage;
-    public Button B1;
-    public Button B2;
+
+    public TextMeshProUGUI nextLvl;
+    public TextMeshProUGUI attackSpeedNextLvl;
+    public TextMeshProUGUI damageNextLvl;
+
+
+    public Button upgradeBtn;
 
     ProduceBuilding e;
     TowerController f;
     Transform currentTower;
+    public ResourceManager resourceManager;
+
 
 
     void Update()
@@ -33,6 +45,7 @@ public class TowerPlacer : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !isPlacing && !EventSystem.current.IsPointerOverGameObject())
         {
+            ProduceClicker();
             TowerClicker();
         }
 
@@ -91,14 +104,19 @@ public class TowerPlacer : MonoBehaviour
             Debug.Log(hit.transform.tag);
             if (e != null)
             {
-                panel.SetActive(true);
+                produceUpgradePanel.SetActive(true);
                 namee.SetText(hit.transform.root.name);
                 attackSpeed.SetText(e.productionTime.ToString());
                 damage.SetText(e.productionAmount.ToString());
+                Lvl.SetText(e.level.ToString());
+                nextLvl.SetText((e.level+1).ToString());
+                attackSpeedNextLvl.SetText((e.productionTime-1).ToString());
+                damageNextLvl.SetText((e.productionAmount+1).ToString());
             }
             else
             {
-                panel.SetActive(false);
+                produceUpgradePanel.SetActive(false);
+                towerUpgradePanel.SetActive(false);
             }
         }
     }
@@ -112,14 +130,19 @@ public class TowerPlacer : MonoBehaviour
             Debug.Log(hit.transform.tag);
             if (f != null)
             {
-                panel.SetActive(true);
+                towerUpgradePanel.SetActive(true);
                 namee.SetText(hit.transform.root.name);
                 attackSpeed.SetText(f.attackRate.ToString());
                 damage.SetText(f.bulletDamage.ToString());
+                Lvl.SetText(f.level.ToString());
+                nextLvl.SetText((f.level + 1).ToString());
+                attackSpeedNextLvl.SetText((f.attackRate + 1).ToString());
+                damageNextLvl.SetText((f.bulletDamage + 1).ToString());
             }
             else
             {
-                panel.SetActive(false);
+                towerUpgradePanel.SetActive(false);
+                produceUpgradePanel.SetActive(false);
             }
         }
     }
@@ -161,20 +184,19 @@ public class TowerPlacer : MonoBehaviour
         Destroy(pendingTower);
         isPlacing = false;
     }
-   // public void upgradeSpd()
-   // {
-   //     if (e != null)
-   //     {
-   //         e.attackRate = Mathf.Round((e.attackRate + 0.1f)*10)*0.1f;
-   //         attackSpeed.SetText("speed: " + e.attackRate);
-   //     }
-   // }
-   // public void upgradeDmg()
-   // {
-   //     if (e != null)
-   //     {
-   //         e.bulletDamage = e.bulletDamage + 1;
-   //         damage.SetText("dmg: " + e.bulletDamage);
-   //     }
-   // }
+    public void upgrade()
+    {
+        if (resourceManager.money >= f.upgradeCost)
+        {
+            f.attackRate++;
+            f.bulletDamage++;
+            f.level++;
+            f.upgradeCost = f.upgradeCost + 50;
+        }
+        else
+        {
+            Debug.Log("not enough money");
+            return;
+        }
+    }
 }
