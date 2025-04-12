@@ -146,7 +146,7 @@ public class TowerPlacer : MonoBehaviour
                 produceName.SetText(currentProduce.name);
                 produceSpeed.SetText(buildingController.productionTime.ToString());
                 produceAmount.SetText(buildingController.productionAmount.ToString());
-                produceLevel.SetText(buildingController.level.ToString());
+                produceLevel.SetText("Level " + buildingController.level.ToString());
                 produceCost.SetText(buildingController.upgradeCost.ToString());
 
                 produceSpeedN.SetText((buildingController.productionTime + 1).ToString());
@@ -186,7 +186,7 @@ public class TowerPlacer : MonoBehaviour
                 towerName.SetText("Tower");
                 towerSpeed.SetText(towerController.attackRate.ToString());
                 towerDamage.SetText(towerController.bulletDamage.ToString());
-                towerLevel.SetText(towerController.level.ToString());
+                towerLevel.SetText("Level " + towerController.level.ToString());
                 towerCost.SetText(towerController.upgradeCost.ToString());
 
                 towerSpeedN.SetText((towerController.attackRate + 1).ToString());
@@ -216,7 +216,7 @@ public class TowerPlacer : MonoBehaviour
                 gateUpgradePanel.SetActive(true);
 
                 gateName.SetText(currentGate.name);
-                gateLevel.SetText(gateController.lvl.ToString());
+                gateLevel.SetText("Level " + gateController.lvl.ToString());
                 gateHealth.SetText(gateController.maxHealth.ToString());
                 gateArmor.SetText(gateController.armor.ToString());
                 gateCost.SetText(gateController.upgradeCost.ToString());
@@ -283,7 +283,7 @@ public class TowerPlacer : MonoBehaviour
             towerName.SetText(currentTower.name);
             towerSpeed.SetText(towerController.attackRate.ToString());
             towerDamage.SetText(towerController.bulletDamage.ToString());
-            towerLevel.SetText(towerController.level.ToString());
+            towerLevel.SetText("Level " + towerController.level.ToString());
             towerCost.SetText(towerController.upgradeCost.ToString());
 
             towerSpeedN.SetText((towerController.attackRate + 1).ToString());
@@ -310,7 +310,7 @@ public class TowerPlacer : MonoBehaviour
             produceName.SetText(currentProduce.name);
             produceSpeed.SetText(buildingController.productionTime.ToString());
             produceAmount.SetText(buildingController.productionAmount.ToString());
-            produceLevel.SetText(buildingController.level.ToString());
+            produceLevel.SetText("Level " + buildingController.level.ToString());
             produceCost.SetText(buildingController.upgradeCost.ToString());
 
             produceSpeedN.SetText((buildingController.productionTime + 1).ToString());
@@ -332,7 +332,7 @@ public class TowerPlacer : MonoBehaviour
             gateController.upgrade();
 
             gateName.SetText(currentGate.name);
-            gateLevel.SetText(gateController.lvl.ToString());
+            gateLevel.SetText("Level " + gateController.lvl.ToString());
             gateHealth.SetText(gateController.maxHealth.ToString());
             gateArmor.SetText(gateController.armor.ToString());
             gateCost.SetText(gateController.upgradeCost.ToString());
