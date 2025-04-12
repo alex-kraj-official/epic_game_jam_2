@@ -65,10 +65,13 @@ public class TowerController : MonoBehaviour
     void shoot()
     {
         GameObject newBullet = Instantiate(bullet, shootPoint.position, shootPoint.rotation);
+        ProjectileController e = newBullet.GetComponent<ProjectileController>();
+        e.target = enemy;
+        e.damage = bulletDamage;
         Rigidbody bulletRb = newBullet.GetComponent<Rigidbody>();
         if (bulletRb != null)
         {
-            bulletRb.AddForce(shootPoint.forward*20f, ForceMode.Impulse);
+            //bulletRb.AddForce(shootPoint.forward*20f, ForceMode.Impulse);
         }
         nextTimeToFire = Time.time + 1f / attackRate;
     }

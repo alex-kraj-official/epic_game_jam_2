@@ -24,6 +24,10 @@ public class EnemyController : MonoBehaviour
     private void Update()
     {
         MoveToTarget();
+        if (health <=0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void MoveToTarget()
@@ -59,5 +63,11 @@ public class EnemyController : MonoBehaviour
     {
         Debug.Log("attacked gate for: " + damage +  "damage");
         gateController.takeDamage(damage);
+    }
+    public void takeDamage(float damage)
+    {
+        health = health - damage;
+        Debug.Log("ouch");
+        return;
     }
 }

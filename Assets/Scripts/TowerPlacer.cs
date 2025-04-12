@@ -20,6 +20,7 @@ public class TowerPlacer : MonoBehaviour
     public Button B2;
 
     ProduceBuilding e;
+    TowerController f;
     Transform currentTower;
 
 
@@ -28,12 +29,10 @@ public class TowerPlacer : MonoBehaviour
         // Start placement mode on '1' key press
         if (Input.GetKeyDown(KeyCode.Alpha1) && !isPlacing && !EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("a");
             StartPlacing();
         }
         if (Input.GetMouseButtonDown(0) && !isPlacing && !EventSystem.current.IsPointerOverGameObject())
         {
-            Debug.Log("b");
             TowerClicker();
         }
 
@@ -82,7 +81,7 @@ public class TowerPlacer : MonoBehaviour
         // Disable tower functionality while placing
         //pendingTower.GetComponent<Tower>().enabled = false;
     }
-    void TowerClicker()
+    void ProduceClicker()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -94,6 +93,29 @@ public class TowerPlacer : MonoBehaviour
             {
                 panel.SetActive(true);
                 namee.SetText(hit.transform.root.name);
+                attackSpeed.SetText(e.productionTime.ToString());
+                damage.SetText(e.productionAmount.ToString());
+            }
+            else
+            {
+                panel.SetActive(false);
+            }
+        }
+    }
+    void TowerClicker()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            f = hit.transform.root.GetComponent<TowerController>();
+            currentTower = hit.transform;
+            Debug.Log(hit.transform.tag);
+            if (f != null)
+            {
+                panel.SetActive(true);
+                namee.SetText(hit.transform.root.name);
+                attackSpeed.SetText(f.attackRate.ToString());
+                damage.SetText(f.bulletDamage.ToString());
             }
             else
             {

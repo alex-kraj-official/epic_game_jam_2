@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Resources;
-using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class ProduceBuilding : MonoBehaviour
 {
@@ -11,6 +9,11 @@ public class ProduceBuilding : MonoBehaviour
     public float productionTime;
     public float upgradeCost;
     public ResourceManager resourceManager;
+
+    public TextMeshProUGUI amountText;
+    public TextMeshProUGUI speedText;
+    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI costText;
 
     private void Start()
     {
@@ -66,6 +69,11 @@ public class ProduceBuilding : MonoBehaviour
             productionTime--;
             productionAmount++;
             upgradeCost = upgradeCost + 50;
+
+            levelText.SetText(level.ToString());
+            speedText.SetText(productionTime.ToString());
+            costText.SetText(upgradeCost.ToString());
+            amountText.SetText(productionAmount.ToString());
         }
         else
         {
