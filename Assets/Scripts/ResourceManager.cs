@@ -14,6 +14,7 @@ public class ResourceManager : MonoBehaviour
     public float ore;
 	public float wheat;
 
+
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI sheepText;
     public TextMeshProUGUI woodText;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -11,6 +12,14 @@ public class EnemyController : MonoBehaviour
     public Transform[] target;
     public int currentTargetIndex = 0;
 
+    public bool isAttacking = false;
+
+    private GateController gateController;
+
+    private void Start()
+    {
+        gateController = FindObjectOfType<GateController>();
+    }
 
     private void Update()
     {
@@ -21,8 +30,12 @@ public class EnemyController : MonoBehaviour
     {
         if (currentTargetIndex >= target.Length)
         {
-            //Debug.Log("reached final target");
-            return; // All targets reached
+            if (!isAttacking)
+            {
+                isAttacking = true;
+                StartCoroutine(AttackLoop());
+            }
+            return;
         }
 
         transform.position = Vector3.MoveTowards(transform.position, target[currentTargetIndex].position, speed * Time.deltaTime);
@@ -33,13 +46,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    IEnumerator AttackLoop()
     {
-        if (other.gameObject.CompareTag("Base"))
+        while (true)
         {
-            BaseController a = other.GetComponent<BaseController>();
-            a.TakeDamage(damage);
-            Debug.Log("REACHED BASE LOLOLOL");
+            attack();
+            yield return new WaitForSeconds(speed);
+            
         }
+    }
+    void attack()
+    {
+        Debug.Log("attacked gate for: " + damage +  "damage");
+        gateController.takeDamage(damage);
     }
 }
