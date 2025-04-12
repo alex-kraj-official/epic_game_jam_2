@@ -14,24 +14,57 @@ public class TowerPlacer : MonoBehaviour
     private bool isPlacing = false;
 
     //variables for panel
+    [Header("PRODUCE AND TOWER PANELS")]
     public GameObject produceUpgradePanel;
     public GameObject towerUpgradePanel;
+    public GameObject gateUpgradePanel;
 
-    public TextMeshProUGUI namee;
-    public TextMeshProUGUI Lvl;
-    public TextMeshProUGUI attackSpeed;
-    public TextMeshProUGUI damage;
+    //tower panel variables
+    [Header("TOWER CURRENT LEVEL VARIABLES")]
+    public TextMeshProUGUI towerName;
+    public TextMeshProUGUI towerSpeed;
+    public TextMeshProUGUI towerDamage;
+    public TextMeshProUGUI towerLevel;
+    public TextMeshProUGUI towerCost;
 
-    public TextMeshProUGUI nextLvl;
-    public TextMeshProUGUI attackSpeedNextLvl;
-    public TextMeshProUGUI damageNextLvl;
+    [Header("TOWER NEXT LEVEL VARIABLES")]
+    public TextMeshProUGUI towerSpeedN;
+    public TextMeshProUGUI towerDamageN;
+    public TextMeshProUGUI towerLevelN;
 
+    //produce building panel variables
+    [Header("PRODUCE CURRENT LEVEL VARIABLES")]
+    public TextMeshProUGUI produceName;
+    public TextMeshProUGUI produceSpeed;
+    public TextMeshProUGUI produceAmount;
+    public TextMeshProUGUI produceLevel;
+    public TextMeshProUGUI produceCost;
 
-    public Button upgradeBtn;
+    [Header("PRODUCE NEXT LEVEL VARIABLES")]
+    public TextMeshProUGUI produceSpeedN;
+    public TextMeshProUGUI produceAmountN;
+    public TextMeshProUGUI produceLevelN;
 
-    ProduceBuilding e;
-    TowerController f;
+    [Header("GATE CURRENT LEVEL VARIABLES")]
+    public TextMeshProUGUI gateName;
+    public TextMeshProUGUI gateLevel;
+    public TextMeshProUGUI gateHealth;
+    public TextMeshProUGUI gateArmor;
+    public TextMeshProUGUI gateCost;
+    public TextMeshProUGUI repairCost;
+
+    [Header("GATE NEXT LEVEL VARIABLES")]
+    public TextMeshProUGUI gateLevelN;
+    public TextMeshProUGUI gateHealthN;
+    public TextMeshProUGUI gateArmorN;
+
+    BuildingController buildingController;
+    TowerController towerController;
+    GateController gateController;
+
+    Transform currentGate;
     Transform currentTower;
+    Transform currentProduce;
     public ResourceManager resourceManager;
 
 
@@ -47,6 +80,7 @@ public class TowerPlacer : MonoBehaviour
         {
             ProduceClicker();
             TowerClicker();
+            GateClicker();
         }
 
         // While in placement mode
@@ -99,24 +133,30 @@ public class TowerPlacer : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            e = hit.transform.root.GetComponent<ProduceBuilding>();
-            currentTower = hit.transform;
+            buildingController = hit.transform.GetComponent<BuildingController>();
+            currentProduce = hit.transform;
             Debug.Log(hit.transform.tag);
-            if (e != null)
+            if (buildingController != null)
             {
+                Debug.Log("asdasd");
+                towerUpgradePanel.SetActive(false);
                 produceUpgradePanel.SetActive(true);
-                namee.SetText(hit.transform.root.name);
-                attackSpeed.SetText(e.productionTime.ToString());
-                damage.SetText(e.productionAmount.ToString());
-                Lvl.SetText(e.level.ToString());
-                nextLvl.SetText((e.level+1).ToString());
-                attackSpeedNextLvl.SetText((e.productionTime-1).ToString());
-                damageNextLvl.SetText((e.productionAmount+1).ToString());
+                gateUpgradePanel.SetActive(false);
+
+                produceName.SetText(currentProduce.name);
+                produceSpeed.SetText(buildingController.productionTime.ToString());
+                produceAmount.SetText(buildingController.productionAmount.ToString());
+                produceLevel.SetText(buildingController.level.ToString());
+                produceCost.SetText(buildingController.upgradeCost.ToString());
+
+                produceSpeedN.SetText((buildingController.productionTime + 1).ToString());
+                produceAmountN.SetText((buildingController.productionAmount + 1).ToString());
+                produceLevelN.SetText((buildingController.level + 1).ToString());
             }
             else
             {
+                Debug.Log("no buildingcontroller");
                 produceUpgradePanel.SetActive(false);
-                towerUpgradePanel.SetActive(false);
             }
         }
     }
@@ -125,27 +165,65 @@ public class TowerPlacer : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            f = hit.transform.root.GetComponent<TowerController>();
+            towerController = hit.transform.root.GetComponent<TowerController>();
             currentTower = hit.transform;
             Debug.Log(hit.transform.tag);
-            if (f != null)
+            if (towerController != null)
             {
+                produceUpgradePanel.SetActive(false);
                 towerUpgradePanel.SetActive(true);
-                namee.SetText(hit.transform.root.name);
-                attackSpeed.SetText(f.attackRate.ToString());
-                damage.SetText(f.bulletDamage.ToString());
-                Lvl.SetText(f.level.ToString());
-                nextLvl.SetText((f.level + 1).ToString());
-                attackSpeedNextLvl.SetText((f.attackRate + 1).ToString());
-                damageNextLvl.SetText((f.bulletDamage + 1).ToString());
+                gateUpgradePanel.SetActive(false);
+
+                towerName.SetText("Tower");
+                towerSpeed.SetText(towerController.attackRate.ToString());
+                towerDamage.SetText(towerController.bulletDamage.ToString());
+                towerLevel.SetText(towerController.level.ToString());
+                towerCost.SetText(towerController.upgradeCost.ToString());
+
+                towerSpeedN.SetText((towerController.attackRate + 1).ToString());
+                towerDamageN.SetText((towerController.bulletDamage + 1).ToString());
+                towerLevelN.SetText((towerController.level + 1).ToString());
+
             }
             else
             {
                 towerUpgradePanel.SetActive(false);
-                produceUpgradePanel.SetActive(false);
             }
         }
     }
+
+    void GateClicker()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            gateController = hit.transform.root.GetComponent<GateController>();
+            currentGate = hit.transform;
+            Debug.Log(hit.transform.tag);
+            if (gateController != null)
+            {
+                produceUpgradePanel.SetActive(false);
+                towerUpgradePanel.SetActive(false);
+                gateUpgradePanel.SetActive(true);
+
+                gateName.SetText(currentGate.name);
+                gateLevel.SetText(gateController.lvl.ToString());
+                gateHealth.SetText(gateController.health.ToString());
+                gateArmor.SetText(gateController.armor.ToString());
+                gateCost.SetText(gateController.upgradeCost.ToString());
+
+                gateLevelN.SetText((gateController.lvl + 1).ToString());
+                gateHealthN.SetText((gateController.health + 1).ToString());
+                gateArmorN.SetText((gateController.armor + 1).ToString());
+            }
+            else
+            {
+                gateUpgradePanel.SetActive(false);
+            }
+        }
+    }
+
+
     void FollowMousePosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -184,18 +262,93 @@ public class TowerPlacer : MonoBehaviour
         Destroy(pendingTower);
         isPlacing = false;
     }
-    public void upgrade()
+    public void upgradeTower()
     {
-        if (resourceManager.money >= f.upgradeCost)
+        if (resourceManager.money >= towerController.upgradeCost)
         {
-            f.attackRate++;
-            f.bulletDamage++;
-            f.level++;
-            f.upgradeCost = f.upgradeCost + 50;
+            towerController.attackRate++;
+            towerController.bulletDamage++;
+            towerController.level++;
+            towerController.upgradeCost = towerController.upgradeCost + 50;
+
+            towerName.SetText(currentTower.name);
+            towerSpeed.SetText(towerController.attackRate.ToString());
+            towerDamage.SetText(towerController.bulletDamage.ToString());
+            towerLevel.SetText(towerController.level.ToString());
+            towerCost.SetText(towerController.upgradeCost.ToString());
+
+            towerSpeedN.SetText((towerController.attackRate + 1).ToString());
+            towerDamageN.SetText((towerController.bulletDamage + 1).ToString());
+            towerLevelN.SetText((towerController.level + 1).ToString());
+
+            resourceManager.removeGold(towerController.upgradeCost);
         }
         else
         {
             Debug.Log("not enough money");
+            return;
+        }
+    }
+    public void upgradeProduce()
+    {
+        if (resourceManager.money >= buildingController.upgradeCost)
+        {
+            buildingController.productionTime++;
+            buildingController.productionAmount++;
+            buildingController.level++;
+            buildingController.upgradeCost = buildingController.upgradeCost + 50;
+
+            produceName.SetText(currentProduce.name);
+            produceSpeed.SetText(buildingController.productionTime.ToString());
+            produceAmount.SetText(buildingController.productionAmount.ToString());
+            produceLevel.SetText(buildingController.level.ToString());
+            produceCost.SetText(buildingController.upgradeCost.ToString());
+
+            produceSpeedN.SetText((buildingController.productionTime + 1).ToString());
+            produceAmountN.SetText((buildingController.productionAmount + 1).ToString());
+            produceLevelN.SetText((buildingController.level + 1).ToString());
+
+            resourceManager.removeGold(buildingController.upgradeCost);
+        }
+        else
+        {
+            Debug.Log("not enough money");
+            return;
+        }
+    }
+    public void upgradeGate()
+    {
+        if (resourceManager.money >= gateController.upgradeCost)
+        {
+            gateController.upgrade();
+
+            gateName.SetText(currentGate.name);
+            gateLevel.SetText(gateController.lvl.ToString());
+            gateHealth.SetText(gateController.health.ToString());
+            gateArmor.SetText(gateController.armor.ToString());
+            gateCost.SetText(gateController.upgradeCost.ToString());
+
+            gateLevelN.SetText((gateController.lvl + 1).ToString());
+            gateHealthN.SetText((gateController.health + 1).ToString());
+            gateArmorN.SetText((gateController.armor + 1).ToString());
+            resourceManager.removeGold(gateController.upgradeCost);
+        }
+        else
+        {
+            return;
+        }
+
+    }
+    public void repairGate()
+    {
+        if (resourceManager.money >= gateController.repairCost)
+        {
+            gateController.repair();
+            gateHealth.SetText(gateController.health.ToString());
+            resourceManager.removeGold(gateController.repairCost);
+        }
+        else
+        {
             return;
         }
     }
