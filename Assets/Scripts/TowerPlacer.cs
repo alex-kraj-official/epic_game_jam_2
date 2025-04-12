@@ -152,6 +152,14 @@ public class TowerPlacer : MonoBehaviour
                 produceSpeedN.SetText((buildingController.productionTime + 1).ToString());
                 produceAmountN.SetText((buildingController.productionAmount + 1).ToString());
                 produceLevelN.SetText((buildingController.level + 1).ToString());
+                namee.SetText(hit.transform.root.name);
+                attackSpeed.SetText(e.productionTime.ToString());
+                Debug.Log("a");
+                damage.SetText(e.productionAmount.ToString());
+                Lvl.SetText(e.level.ToString());
+                nextLvl.SetText((e.level+1).ToString());
+                attackSpeedNextLvl.SetText((e.productionTime-1).ToString());
+                damageNextLvl.SetText((e.productionAmount+1).ToString());
             }
             else
             {
