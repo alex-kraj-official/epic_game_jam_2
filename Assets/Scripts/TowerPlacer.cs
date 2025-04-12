@@ -107,6 +107,7 @@ public class TowerPlacer : MonoBehaviour
                 produceUpgradePanel.SetActive(true);
                 namee.SetText(hit.transform.root.name);
                 attackSpeed.SetText(e.productionTime.ToString());
+                Debug.Log("a");
                 damage.SetText(e.productionAmount.ToString());
                 Lvl.SetText(e.level.ToString());
                 nextLvl.SetText((e.level+1).ToString());
