@@ -1436,6 +1436,7 @@ MonoBehaviour:
   speedTextN: {fileID: 0}
   levelTextN: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 --- !u!1 &406764107
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,6 +1512,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 406764107}
   m_CullTransparentMesh: 1
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 --- !u!1 &507623743
@@ -3960,7 +3963,10 @@ MonoBehaviour:
   speedTextN: {fileID: 0}
   levelTextN: {fileID: 0}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 --- !u!1 &1628478832 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6030547602791464947, guid: 5c70883bb8796344283c17cbed451d1f, type: 3}
