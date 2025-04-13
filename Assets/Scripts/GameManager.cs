@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     private bool waitingForChoice = false;
 
+
     void Start()
     {
         InvokeRepeating(nameof(TriggerTaxEvent), taxInterval, taxInterval);

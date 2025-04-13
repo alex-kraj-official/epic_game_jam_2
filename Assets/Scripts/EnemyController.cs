@@ -16,30 +16,68 @@ public class EnemyController : MonoBehaviour
 
     private GateController gateController;
 
+    public GameObject intact;
+    public GameObject broke;
+
+    Animator animator;
+    private GameObject gate;
+
     private void Start()
     {
         gateController = FindObjectOfType<GateController>();
+        gate = GameObject.FindGameObjectWithTag("Gate");
+        animator = intact.GetComponent<Animator>();
+        animator.Play("Giant@Run 01 - Forward"); // Name of your clip exactly
     }
 
     private void Update()
     {
-        MoveToTarget();
-        if (health <=0)
+        if (health <=0 )
         {
-            Destroy(this.gameObject);
+            intact.SetActive(false);
+            broke.SetActive(true);
+            Destroy(this.gameObject,1.5f);
         }
+        else
+        {
+            MoveToTarget();
+        }
+    }
+
+    void StartPunching()
+    {
+        animator.Play("punch");
     }
 
     void MoveToTarget()
     {
         if (currentTargetIndex >= target.Length)
         {
+            // Rotate toward the gate
+            Vector3 directionToGate = (gate.transform.position - transform.position).normalized;
+
+            if (directionToGate != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(directionToGate);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            }
+
             if (!isAttacking)
             {
                 isAttacking = true;
                 StartCoroutine(AttackLoop());
+                StartPunching();
             }
             return;
+        }
+
+        // Normal movement logic
+        Vector3 direction = (target[currentTargetIndex].position - transform.position).normalized;
+
+        if (direction != Vector3.zero)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
         }
 
         transform.position = Vector3.MoveTowards(transform.position, target[currentTargetIndex].position, speed * Time.deltaTime);
