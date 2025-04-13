@@ -23,6 +23,16 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI oreText;
     public TextMeshProUGUI wheatText;
 
+    private void Start()
+    {
+        updateText(sheepText, sheep);
+        updateText(moneyText, money);
+        updateText(woodText, wood);
+        updateText(peopleText, people);
+        updateText(oreText, ore);
+        updateText(wheatText, wheat);
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
